@@ -1,0 +1,84 @@
+﻿<Page x:Class="RedBerryProject.OauthPages.Register"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RedBerryProject.OauthPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Register">
+
+    <StackPanel Margin="250,0,250,0" VerticalAlignment="Center">
+        <TextBlock Text="Реєстрація нового акаунту"
+                   Height="25"
+                   Width="auto"
+                   FontSize="16"
+                   FontStyle="Oblique"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+        <TextBlock Text="Введіть ім'я:"
+                   FontSize="12"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   />
+        <TextBox x:Name="UsernameBox"/>
+        <Border HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!--FIRST PASSWORD BOX-->
+                <TextBlock Text="Придумайте новий пароль:"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontSize="12"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"/>
+                <TextBox x:Name="FirstVisiblePasswordBox"
+                         Grid.Row="1" Grid.Column="0"
+                         HorizontalAlignment="Stretch"
+                         Text="{Binding FirstPassword, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Visibility="Collapsed"/>
+                <PasswordBox x:Name="FirstHiddenPasswordBox"
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalAlignment="Stretch"
+                             PasswordChanged="FirstHiddenPasswordBox_PasswordChanged"/>
+                <Button x:Name="FirstShowHideButton"
+                        Content="{Binding ShowPasswordText}"
+                        Grid.Column="1" Grid.Row="1"
+                        Click="TogglePasswordVisibility_Click"/>
+                <!--SECOND PASSWORD BOX-->
+                <TextBlock Text="Повторіть пароль знову:"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           FontSize="12"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"/>
+                
+                <TextBox x:Name="SecondVisiblePasswordBox"
+                         Grid.Row="3" Grid.Column="0"
+                         HorizontalAlignment="Stretch"
+                         Text="{Binding SecondPassword, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Visibility="Collapsed"/>
+                <PasswordBox x:Name="SecondHiddenPasswordBox"
+                             Grid.Row="3" Grid.Column="0"
+                             HorizontalAlignment="Stretch"
+                             PasswordChanged="SecondHiddenPasswordBox_PasswordChanged"/>
+                <Button x:Name="SecondShowHideButton"
+                        Content="{Binding ShowPasswordText}"
+                        Grid.Column="1" Grid.Row="3"
+                        Click="TogglePasswordVisibility_Click"/>
+            </Grid>
+        </Border>
+        
+        <Button Content="Зареєструватися" Margin="0,10,0,0"/>
+        <Button Content="Перейти до авторизації" Click="NavigateToAuth_Click" Margin="0,10,0,0"/>
+    </StackPanel>
+</Page>

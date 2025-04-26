@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedBerryProject
+namespace RedBerryProject.ViewModels.Base
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

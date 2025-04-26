@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RedBerryProject.ViewModels.Base;
 
-namespace RedBerryProject.OauthPages
+namespace RedBerryProject.ViewModels.Oauth
 {
     public class RegisterViewModel:ViewModelBase
     {
-        private string _firstPassword;
-        private string _secondPassword;
+        private string _firstPassword = "";
+        private string _secondPassword = "";
         private bool _isPasswordVisible;
 
         public string FirstPassword

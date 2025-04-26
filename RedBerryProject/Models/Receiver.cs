@@ -5,7 +5,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedBerryProject.Users
+namespace RedBerryProject.Models
 {
     internal class Receiver:User
     {

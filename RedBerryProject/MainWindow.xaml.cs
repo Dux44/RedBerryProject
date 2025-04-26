@@ -8,7 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RedBerryProject.OauthPages;
+using RedBerryProject.Views.OauthPages;
+using RedBerryProject.Views.ReceiverPages;
 
 namespace RedBerryProject
 {
@@ -19,8 +20,17 @@ namespace RedBerryProject
     {
         public MainWindow()
         {
-            InitializeComponent(); // цей метод має підтягнутись з .g.cs
-            MainFrame.Navigate(new Auth(MainFrame));
+            InitializeComponent(); 
+            var authPage = new Auth(MainFrame);
+            authPage.AuthSucces += AuthPage_AuthSucces;
+            MainFrame.Navigate(authPage);
+        }
+
+        private void AuthPage_AuthSucces()
+        {
+            var receiverWindow = new ReceiverWindow();
+            receiverWindow.Show();
+            Close();
         }
     }
 }

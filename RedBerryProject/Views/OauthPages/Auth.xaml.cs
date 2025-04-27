@@ -23,21 +23,21 @@ namespace RedBerryProject.Views.OauthPages
     public partial class Auth : Page
     {
         //fields
-        private Frame _parentFrame; //тут зберігається посилання на основну панель наякій буде відображено UI 
         private AuthViewModel _viewModel; //це як частина MVVM уся логіка яка динамічно прив'язана до INotifyPropertyChanged має бути винесена у окремий клас
 
         //events
+        public event Action NavigateToRegister;
         public event Action AuthSucces;
-        public Auth(Frame parentFrame)
+        public Auth()
         {
             InitializeComponent();
-            _parentFrame = parentFrame;
             _viewModel = new AuthViewModel();
             DataContext = _viewModel;
         }
         private void NavigateToRegister_Click(object sender, RoutedEventArgs e) //навігація на сторінку реєстрації
         {
-            _parentFrame.Navigate(new Register(_parentFrame));
+            
+            NavigateToRegister?.Invoke();
         }
         private void HiddenPassworddBox_PasswordChanged(object sender, RoutedEventArgs e) //збереження усього написаного поки обєктом для запису є PasswordBox
         {
@@ -76,7 +76,9 @@ namespace RedBerryProject.Views.OauthPages
             if(ValidateFields())
             {
                 MessageBox.Show("Correct Password continue to login");
-                AuthSucces?.Invoke();
+                //пошук користувча з бази даних та передача даних у його сторінку
+
+                AuthSucces?.Invoke(); //подія відкриття наступного вікна
             }
             
         }
@@ -86,6 +88,7 @@ namespace RedBerryProject.Views.OauthPages
             //перевірка пароля з бази даних
             //тоді пустити користувача у його особистий кабінет
             bool emptyName = false;
+            bool nameDontExists = false; //додаткова перевірка чи ім'я існує в базі даних
             bool emptyPassword = false;
             bool incorrectPassword = false;
             if (string.IsNullOrWhiteSpace(UsernameBox.Text))

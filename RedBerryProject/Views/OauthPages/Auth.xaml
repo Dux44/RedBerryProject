@@ -19,7 +19,7 @@
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
                    />
-        <TextBlock Text="Введіть ім'я:"
+        <TextBlock Text="Введіть логін:"
                    FontSize="12"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"/>

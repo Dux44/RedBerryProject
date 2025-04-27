@@ -23,5 +23,23 @@ namespace RedBerryProject.Views.ReceiverPages
         {
             InitializeComponent();
         }
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+             MessageBoxResult choice = MessageBox.Show("Ви точно впевнені що хочете вийти?", "Вихід з додатку", MessageBoxButton.YesNo, MessageBoxImage.Question);
+             if(choice == MessageBoxResult.Yes)
+             {
+                Close();
+             }
+            else
+            {
+                return;
+            }
+        }
+        private void ButtonShowPersonalInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var personalInfoPage = new PersonalInfo(ReceiverFrame);
+            ReceiverFrame.Navigate(personalInfoPage);
+
+        }
     }
 }

@@ -24,21 +24,24 @@
         
         <DockPanel Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2"
                     Background="MidnightBlue" LastChildFill="False">
-            <Button Content="Вихід"
+            <Button x:Name="bExit"
+                    Content="Вихід"
                     DockPanel.Dock="Bottom"
-                    Margin="3"/>
+                    Margin="10,3,10,10"
+                    Click="ButtonExit_Click"/>
             
             <Button Content="Особиста інформація"
                     DockPanel.Dock="Top"
-                    Margin="3,25,3,3"/>
+                    Margin="10,25,10,3"
+                    Click="ButtonShowPersonalInfo_Click"/>
             
             <Button Content="Історія заяв"
                     DockPanel.Dock="Top"
-                    Margin="3"/>
+                    Margin="10,3,10,3"/>
             
             <Button Content="Календар"
                     DockPanel.Dock="Top"
-                    Margin="3"/>
+                    Margin="10,3,10,3"/>
         </DockPanel>
         <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
                    Text="Вітаю! ..Ім'я користувача.."

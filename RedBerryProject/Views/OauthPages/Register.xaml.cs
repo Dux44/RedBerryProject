@@ -23,20 +23,20 @@ namespace RedBerryProject.Views.OauthPages
     /// </summary>
     public partial class Register : Page
     {
-        private Frame _parentFrame;
         private RegisterViewModel _viewModel;
 
         private readonly string pattern = @"^(?=(?:.*\d){2,})(?=.*[A-Z]).*$"; //регулярка на обов'язково дві цифри і одна велика літера
-        public Register(Frame parentFrame)
+
+        public event Action NavigateToAuth;
+        public Register()
         {
             InitializeComponent();
-            _parentFrame = parentFrame;
             _viewModel = new RegisterViewModel();
             DataContext = _viewModel;
         }
         private void NavigateToAuth_Click(object sender, RoutedEventArgs e) //переадресація на сторінку Auth
         {
-            _parentFrame.Navigate(new Auth(_parentFrame));
+           NavigateToAuth?.Invoke(); //перехід до MainWindow де і відбувається логіка переходу між сторінками
         }
         private void TogglePasswordVisibility_Click(object sender, RoutedEventArgs e) // логіка поведінки кнопок show/hide і перемикання між TextBox і PasswordBox
         {
@@ -106,6 +106,7 @@ namespace RedBerryProject.Views.OauthPages
         private bool ValidateFields()
         {
             bool emptyName = false;
+            bool thatNameIsTaken = false; //при реєстрації перевірка на те чи логін ще не зайнятоіншим користувачем
             bool emptyFirstPassword = false;
             bool firstPasswordLenghtViolation = false;
             bool weakPassword = false;

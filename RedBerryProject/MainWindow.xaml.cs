@@ -20,15 +20,26 @@ namespace RedBerryProject
     {
         public MainWindow()
         {
-            InitializeComponent(); 
-            var authPage = new Auth(MainFrame);
+            InitializeComponent();
+            ShowAuthPage();
+        }
+        private void ShowAuthPage()
+        {
+            var authPage = new Auth();
+            authPage.NavigateToRegister += ShowRegisterPage;
             authPage.AuthSucces += AuthPage_AuthSucces;
             MainFrame.Navigate(authPage);
         }
-
+        private void ShowRegisterPage()
+        {
+            var registerPage = new Register();
+            registerPage.NavigateToAuth += ShowAuthPage;
+            MainFrame.Navigate(registerPage);
+        }
         private void AuthPage_AuthSucces()
         {
             var receiverWindow = new ReceiverWindow();
+            
             receiverWindow.Show();
             Close();
         }

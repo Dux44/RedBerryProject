@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 
 using RedBerryProject.ViewModels.Oauth;
+using RedBerryProject.Services;
+using RedBerryProject.Models;
 
 namespace RedBerryProject.Views.OauthPages
 {
@@ -95,18 +97,56 @@ namespace RedBerryProject.Views.OauthPages
             UsernameBoxError.Visibility = Visibility.Collapsed; //при будь-якій зміні поідомлення зникає
         }
         
-        private void RegisterButton_Click(object sender, EventArgs e)
+        private void RegisterButton_Click(object sender, EventArgs e) //тут створити користувача і записати до бази і переадресувати на авторизацію
         {
-            if (ValidateFields())
+            if (!ValidateFields()) return;
+
+            string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "database.db");
+            var db = new DataBaseService(dbPath);
+
+            if (db.UserExists(UsernameBox.Text))
             {
-                MessageBox.Show("Успішна реєстрація!");
-                //тут створити користувача і записати до бази і переадресувати на авторизацію
+                UsernameBoxError.Text = "Це ім'я зайнятe!";
+                UsernameBoxError.Visibility = Visibility.Visible;
+                return;
             }
+
+            //string hashedPassword = HashPassword(_viewModel.FirstPassword);
+            var newUser = new User
+            {
+                Username = UsernameBox.Text,
+                Password = _viewModel.FirstPassword, // краще хешувати!
+                Role = cbIsUserAdmin.IsChecked == true ? "Admin" : "Receiver"
+            };
+            long userId = db.InsertUser(newUser);
+
+            if(cbIsUserAdmin.IsChecked == true)
+            {
+                //TODO: перевірка comboBox.SelectedIndex ЧИ ОБРАНО ЯКЩО НІ НЕ ПУСКАТИ АДМІНА ДО РЕЄСТРАЦІЇ
+                var newAdminData = new Admin
+                {
+                    IdUser = userId,
+                    IdHelpPoint = cbNumberOfHelpPoint.SelectedIndex,
+                };
+                //запис у таблицю ADMINDATA
+                db.InsertAdminData(newAdminData);
+            }
+            else if(cbIsUserAdmin.IsChecked == false)
+            {
+                var newUserData = new Receiver
+                {
+                    Id_user = userId,
+                    DateOfBirth = new DateTime(1999, 1, 1),
+                };
+                //Запис у таблицю USERDATA
+                db.InsertUserData(newUserData);
+            }
+            MessageBox.Show("Успішна реєстрація!");
+            NavigateToAuth?.Invoke();
         }
         private bool ValidateFields()
         {
             bool emptyName = false;
-            bool thatNameIsTaken = false; //при реєстрації перевірка на те чи логін ще не зайнятоіншим користувачем
             bool emptyFirstPassword = false;
             bool firstPasswordLenghtViolation = false;
             bool weakPassword = false;

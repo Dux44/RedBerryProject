@@ -41,10 +41,11 @@
             
             <Button Content="Календар"
                     DockPanel.Dock="Top"
-                    Margin="10,3,10,3"/>
+                    Margin="10,3,10,3" Visibility="Collapsed"/>
         </DockPanel>
-        <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
-                   Text="Вітаю! ..Ім'я користувача.."
+        <TextBlock x:Name="tbGreetingFrontPage"
+                   Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                   Text="Вітаю!  "
                    FontSize="22"
                    FontWeight="DemiBold"
                    Margin="20,0,0,0"/>

@@ -13,7 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using RedBerryProject.Services;
 using RedBerryProject.ViewModels.Oauth;
+using RedBerryProject.Models;
 
 namespace RedBerryProject.Views.OauthPages
 {
@@ -27,7 +30,11 @@ namespace RedBerryProject.Views.OauthPages
 
         //events
         public event Action NavigateToRegister;
-        public event Action AuthSucces;
+        public delegate void AuthSuccesUserHandler(Receiver receiver, string username);
+        public event AuthSuccesUserHandler AuthSuccesUser;
+
+        public delegate void AuthSuccesAdminHandler(Admin admin, string username);
+        public event AuthSuccesAdminHandler AuthSuccesAdmin;
         public Auth()
         {
             InitializeComponent();
@@ -36,7 +43,6 @@ namespace RedBerryProject.Views.OauthPages
         }
         private void NavigateToRegister_Click(object sender, RoutedEventArgs e) //навігація на сторінку реєстрації
         {
-            
             NavigateToRegister?.Invoke();
         }
         private void HiddenPassworddBox_PasswordChanged(object sender, RoutedEventArgs e) //збереження усього написаного поки обєктом для запису є PasswordBox
@@ -71,15 +77,45 @@ namespace RedBerryProject.Views.OauthPages
         {
             UsernameBoxError.Visibility = Visibility.Collapsed;
         }
-        private void AuthButton_Click(object sender, RoutedEventArgs e)
+        private void AuthButton_Click(object sender, RoutedEventArgs e) //пошук користувча з бази даних та передача даних у його сторінку
         {
-            if(ValidateFields())
-            {
-                MessageBox.Show("Correct Password continue to login");
-                //пошук користувча з бази даних та передача даних у його сторінку
+            if (!ValidateFields()) return;
 
-                AuthSucces?.Invoke(); //подія відкриття наступного вікна
+            string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "database.db");
+            var db = new DataBaseService(dbPath);
+
+            var user = db.GetUserByUsername(UsernameBox.Text); //тут краще поміняти логіку і отримувати увесь обєкт після перевірки на пароль ОПТИМІЗАЦІЯ
+
+            if (user == null)
+            {
+                UsernameBoxError.Text = "Користувача не знайдено!";
+                UsernameBoxError.Visibility = Visibility.Visible;
+                return;
             }
+            if(user.Password != _viewModel.Password)
+            {
+                PasswordErrorMessage.Text = "Неправильний пароль або логін!";
+                PasswordErrorMessage.Visibility = Visibility.Visible;
+                return;
+            }
+
+            if(user.Role == "Receiver")
+            {
+
+                var userData = db.GetUserDataByUserId(user.Id);
+                AuthSuccesUser?.Invoke(userData, user.Username);
+                MessageBox.Show("Пароль коректний вхожу до особистого кабінету користувача");
+
+            }
+            else if(user.Role == "Admin")
+            {
+                var adminData = db.GetAdminDataByUserId(user.Id);
+                AuthSuccesAdmin?.Invoke(adminData, user.Username);
+                MessageBox.Show($"Пароль коректний вхожу до робочої зони пункту №{adminData.IdHelpPoint}");
+            }
+
+            
+           
             
         }
         private bool ValidateFields()
@@ -88,9 +124,9 @@ namespace RedBerryProject.Views.OauthPages
             //перевірка пароля з бази даних
             //тоді пустити користувача у його особистий кабінет
             bool emptyName = false;
-            bool nameDontExists = false; //додаткова перевірка чи ім'я існує в базі даних
+            //bool nameDontExists = false; //додаткова перевірка чи ім'я існує в базі даних
             bool emptyPassword = false;
-            bool incorrectPassword = false;
+            //bool incorrectPassword = false;
             if (string.IsNullOrWhiteSpace(UsernameBox.Text))
             {
                 UsernameBoxError.Visibility = Visibility.Visible;
@@ -102,16 +138,7 @@ namespace RedBerryProject.Views.OauthPages
                 PasswordErrorMessage.Visibility = Visibility.Visible;
                 emptyPassword = true;    
             }
-            else
-            {
-                if (_viewModel.Password != "Password")
-                {
-                    PasswordErrorMessage.Text = "Пароль неправильний!";
-                    PasswordErrorMessage.Visibility = Visibility.Visible;
-                    incorrectPassword = true;
-                }
-            }
-            if (!emptyName && !emptyPassword && !incorrectPassword )
+            if (!emptyName && !emptyPassword)
             {
                 return true;
             }

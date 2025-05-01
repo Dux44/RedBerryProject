@@ -115,24 +115,20 @@
                            Style="{StaticResource LabelTextStyle}" 
                            VerticalAlignment="Top"/>
 
-                <TextBlock Text="Адреса для кореспонденції:" 
-                           Grid.Row="9" Grid.Column="0" 
-                           Style="{StaticResource LabelTextStyle}" 
-                           VerticalAlignment="Top"
-                           TextWrapping="Wrap"/>
+               
 
                 <!-- Роздільник -->
-                <Border Grid.Row="10" Grid.ColumnSpan="2" 
+                <Border Grid.Row="9" Grid.ColumnSpan="2" 
                         BorderBrush="#DDDDDD" BorderThickness="0,1,0,0" 
                         Margin="0,10"/>
 
                 <!-- Контактні та банківські дані - мітки -->
                 <TextBlock Text="Номер телефону:" 
-                           Grid.Row="11" Grid.Column="0" 
+                           Grid.Row="10" Grid.Column="0" 
                            Style="{StaticResource LabelTextStyle}" />
 
                 <TextBlock Text="Номер банківської карти:" 
-                           Grid.Row="12" Grid.Column="0" 
+                           Grid.Row="11" Grid.Column="0" 
                            Style="{StaticResource LabelTextStyle}" />
 
                 <!-- Персональні дані - значення -->
@@ -168,28 +164,25 @@
                            Style="{StaticResource ValueTextStyle}" 
                            TextWrapping="Wrap"/>
 
-                <TextBlock x:Name="tbCorrespondenceAddress" 
-                           Grid.Row="9" Grid.Column="1" 
-                           Style="{StaticResource ValueTextStyle}" 
-                           TextWrapping="Wrap"/>
+                
 
                 <!-- Контактні та банківські дані - значення -->
                 <TextBlock x:Name="tbPhoneNumber" 
-                           Grid.Row="11" Grid.Column="1" 
+                           Grid.Row="10" Grid.Column="1" 
                            Style="{StaticResource ValueTextStyle}" />
 
                 <TextBlock x:Name="tbBankCardNumber" 
-                           Grid.Row="12" Grid.Column="1" 
+                           Grid.Row="11" Grid.Column="1" 
                            Style="{StaticResource ValueTextStyle}" />
 
                 <!-- Роздільник перед блоком фото паспорту -->
-                <Border Grid.Row="13" Grid.ColumnSpan="2" 
+                <Border Grid.Row="12" Grid.ColumnSpan="2" 
                         BorderBrush="#DDDDDD" BorderThickness="0,1,0,0" 
                         Margin="0,10"/>
 
                 <!-- Блок з фото паспорту -->
                 <TextBlock Text="Фото паспорту з двох сторін:" 
-                           Grid.Row="14" Grid.Column="0" 
+                           Grid.Row="13" Grid.Column="0" 
                            Style="{StaticResource LabelTextStyle}"
                            VerticalAlignment="Top"/>
 

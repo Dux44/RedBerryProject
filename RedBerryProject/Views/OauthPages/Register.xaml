@@ -112,5 +112,17 @@
                 Margin="0,10,0,0"
                 Click="RegisterButton_Click"/>
         <Button Content="Перейти до авторизації" Click="NavigateToAuth_Click" Margin="0,10,0,0"/>
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Right" Visibility="Visible">
+            <TextBlock Text="Я адмін:" VerticalAlignment="Center"/>
+            <CheckBox x:Name="cbIsUserAdmin" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbNumberOfHelpPoint"  Text="n" IsEditable="True" IsReadOnly="True">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+                      
+        </StackPanel>
     </StackPanel>
 </Page>

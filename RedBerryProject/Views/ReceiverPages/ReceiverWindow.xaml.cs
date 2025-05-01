@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RedBerryProject.Models;
 
 namespace RedBerryProject.Views.ReceiverPages
 {
@@ -19,9 +20,12 @@ namespace RedBerryProject.Views.ReceiverPages
     /// </summary>
     public partial class ReceiverWindow : Window
     {
-        public ReceiverWindow()
+        private Receiver _receiver;
+        public ReceiverWindow(Receiver receiverData, string username)
         {
             InitializeComponent();
+            tbGreetingFrontPage.Text += username;
+            _receiver = receiverData;
         }
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
@@ -37,9 +41,18 @@ namespace RedBerryProject.Views.ReceiverPages
         }
         private void ButtonShowPersonalInfo_Click(object sender, RoutedEventArgs e)
         {
-            var personalInfoPage = new PersonalInfo(ReceiverFrame);
-            ReceiverFrame.Navigate(personalInfoPage);
+            OpenPersonalInfoPage();
 
+        }
+        private void OpenPersonalInfoEditPage()
+        {
+            var personalInfoEditPage = new PersonalInfoEdit(OpenPersonalInfoPage, ref _receiver);
+            ReceiverFrame.Navigate(personalInfoEditPage);
+        }
+        private void OpenPersonalInfoPage()
+        {
+            var personalInfoPage = new PersonalInfo(OpenPersonalInfoEditPage, ref _receiver);
+            ReceiverFrame.Navigate(personalInfoPage);
         }
     }
 }

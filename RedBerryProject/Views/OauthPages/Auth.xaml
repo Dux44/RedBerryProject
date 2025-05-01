@@ -84,5 +84,6 @@
                    VerticalAlignment="Bottom"
                    />
         <Button Content="Перейти до реєстрації" Click="NavigateToRegister_Click" Margin="0,0,0,0"/>
+
     </StackPanel>
 </Page>

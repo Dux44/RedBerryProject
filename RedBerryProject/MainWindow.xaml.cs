@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RedBerryProject.Views.OauthPages;
 using RedBerryProject.Views.ReceiverPages;
+using RedBerryProject.Models;
 
 namespace RedBerryProject
 {
@@ -27,21 +28,30 @@ namespace RedBerryProject
         {
             var authPage = new Auth();
             authPage.NavigateToRegister += ShowRegisterPage;
-            authPage.AuthSucces += AuthPage_AuthSucces;
+            authPage.AuthSuccesUser += AuthPage_AuthSucces;
+            authPage.AuthSuccesAdmin += AuthPage_AuthSuccesAdmin;
             MainFrame.Navigate(authPage);
         }
+
+       
+
         private void ShowRegisterPage()
         {
             var registerPage = new Register();
             registerPage.NavigateToAuth += ShowAuthPage;
             MainFrame.Navigate(registerPage);
         }
-        private void AuthPage_AuthSucces()
+        private void AuthPage_AuthSucces(Receiver userData, string username)
         {
-            var receiverWindow = new ReceiverWindow();
+           
+            var receiverWindow = new ReceiverWindow(userData,username);
             
             receiverWindow.Show();
             Close();
+        }
+        private void AuthPage_AuthSuccesAdmin(Admin admin, string username)
+        {
+            throw new NotImplementedException();
         }
     }
 }

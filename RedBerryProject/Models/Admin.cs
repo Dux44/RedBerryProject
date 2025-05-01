@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace RedBerryProject.Models
 {
-    internal class Admin:User
+    public class Admin:User
     {
-        private int Id_HelpPoint;
-        public override string GetRole()
-        {
-            return "Admin";
-        }
+        public long IdUser { get; set; }                 // @IdUser
+        public string? FirstName { get; set; }          // @FirstName
+        public string? SecondName { get; set; }          // @SecondName
+        public string? MiddleName { get; set; }          // @MiddleName
+        public int IdHelpPoint { get; set; }             // @IdHelpPoint
+
     }
 }

@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RedBerryProject.Models;
+using RedBerryProject.Services;
+
 namespace RedBerryProject.Views.ReceiverPages
 {
     /// <summary>
@@ -20,19 +23,22 @@ namespace RedBerryProject.Views.ReceiverPages
     /// </summary>
     public partial class PersonalInfoEdit : Page
     {
-        private Frame _parentFrame;
-        public PersonalInfoEdit(Frame parentFrame)
+        private Receiver _receiver;
+        private readonly Action _openPersonalInfoPage; 
+        public PersonalInfoEdit(Action openPersonalInfoPage, ref Receiver receiver)
         {
             InitializeComponent();
-            _parentFrame = parentFrame;
+            _openPersonalInfoPage = openPersonalInfoPage;
+            _receiver = receiver;
         }
         private void ButtonConfirmEditing_Click(object sender, RoutedEventArgs e)
         {
+            
 
         }
         private void ButtonCancelEdiging_Click(object sender, RoutedEventArgs e)
         {
-
+            _openPersonalInfoPage.Invoke();
         }
     }
 }

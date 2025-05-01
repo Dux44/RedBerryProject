@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RedBerryProject.Models;
+
+
 namespace RedBerryProject.Views.ReceiverPages
 {
     /// <summary>
@@ -20,16 +23,32 @@ namespace RedBerryProject.Views.ReceiverPages
     /// </summary>
     public partial class PersonalInfo : Page
     {
-        private Frame _parentFrame;
-        public PersonalInfo(Frame parentFrame)
+        private readonly Action _openEditPage;
+        private Receiver _receiver;
+        
+        public PersonalInfo(Action openEditPage, ref Receiver receiver)
         {
             InitializeComponent();
-            _parentFrame = parentFrame;
+            _openEditPage = openEditPage;
+            _receiver = receiver;
+            ShowAllInfoOnUI(_receiver);
         }
         private void ButtonPersonalInfo_Click(object sender, RoutedEventArgs e)
         {
-            var personalInfoEdit = new PersonalInfoEdit(_parentFrame);
-            _parentFrame.Navigate(personalInfoEdit);
+            _openEditPage.Invoke();
+        }
+        private void ShowAllInfoOnUI(Receiver receiver)
+        {
+            tbFullName.Text = $"{receiver.Surname} {receiver.FirstName} {receiver.MiddleName}";
+            tbNationality.Text = $"{receiver.Nationality}";
+            tbDateOfBirth.Text = $"{receiver.DateOfBirth}"; // тут може бути помилка
+            tbBirthPlace.Text = $"{receiver.AddresOfBirth}";
+            tbGender.Text = $"{receiver.Gender}";
+            tbOfficialAddress.Text = $"{receiver.AddresOffical}";
+            tbActualAddress.Text = $"{receiver.AddresCurrent}";
+            tbPhoneNumber.Text = $"{receiver.PhoneNumber}";
+            tbBankCardNumber.Text = $"{receiver.CardNumber}";
+            //наступна чатина це парсинг фото
         }
     }
 }

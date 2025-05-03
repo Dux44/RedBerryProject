@@ -114,9 +114,9 @@ namespace RedBerryProject.Views.OauthPages
             //string hashedPassword = HashPassword(_viewModel.FirstPassword);
             var newUser = new User
             {
-                Username = UsernameBox.Text,
-                Password = _viewModel.FirstPassword, // краще хешувати!
-                Role = cbIsUserAdmin.IsChecked == true ? "Admin" : "Receiver"
+                username = UsernameBox.Text,
+                password = _viewModel.FirstPassword, // краще хешувати!
+                role = cbIsUserAdmin.IsChecked == true ? "Admin" : "Receiver"
             };
             long userId = db.InsertUser(newUser);
 
@@ -125,18 +125,18 @@ namespace RedBerryProject.Views.OauthPages
                 //TODO: перевірка comboBox.SelectedIndex ЧИ ОБРАНО ЯКЩО НІ НЕ ПУСКАТИ АДМІНА ДО РЕЄСТРАЦІЇ
                 var newAdminData = new Admin
                 {
-                    IdUser = userId,
-                    IdHelpPoint = cbNumberOfHelpPoint.SelectedIndex,
+                    id_user = userId,
+                    id_help_point = cbNumberOfHelpPoint.SelectedIndex,
                 };
                 //запис у таблицю ADMINDATA
                 db.InsertAdminData(newAdminData);
             }
             else if(cbIsUserAdmin.IsChecked == false)
             {
-                var newUserData = new Receiver
+                var newUserData = new UserData
                 {
-                    Id_user = userId,
-                    DateOfBirth = new DateTime(1999, 1, 1),
+                    id_user = userId,
+                    date_of_birth = new DateTime(1999, 1, 1),
                 };
                 //Запис у таблицю USERDATA
                 db.InsertUserData(newUserData);

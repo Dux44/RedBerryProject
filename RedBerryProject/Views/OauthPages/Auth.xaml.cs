@@ -30,7 +30,7 @@ namespace RedBerryProject.Views.OauthPages
 
         //events
         public event Action NavigateToRegister;
-        public delegate void AuthSuccesUserHandler(Receiver receiver, string username);
+        public delegate void AuthSuccesUserHandler(UserData receiver, string username);
         public event AuthSuccesUserHandler AuthSuccesUser;
 
         public delegate void AuthSuccesAdminHandler(Admin admin, string username);
@@ -92,26 +92,26 @@ namespace RedBerryProject.Views.OauthPages
                 UsernameBoxError.Visibility = Visibility.Visible;
                 return;
             }
-            if(user.Password != _viewModel.Password)
+            if(user.password != _viewModel.Password)
             {
                 PasswordErrorMessage.Text = "Неправильний пароль або логін!";
                 PasswordErrorMessage.Visibility = Visibility.Visible;
                 return;
             }
 
-            if(user.Role == "Receiver")
+            if(user.role == "Receiver")
             {
 
-                var userData = db.GetUserDataByUserId(user.Id);
-                AuthSuccesUser?.Invoke(userData, user.Username);
+                var userData = db.GetUserDataByUserId(user.id);
+                AuthSuccesUser?.Invoke(userData, user.username);
                 MessageBox.Show("Пароль коректний вхожу до особистого кабінету користувача");
 
             }
-            else if(user.Role == "Admin")
+            else if(user.role == "Admin")
             {
-                var adminData = db.GetAdminDataByUserId(user.Id);
-                AuthSuccesAdmin?.Invoke(adminData, user.Username);
-                MessageBox.Show($"Пароль коректний вхожу до робочої зони пункту №{adminData.IdHelpPoint}");
+                var adminData = db.GetAdminDataByUserId(user.id);
+                AuthSuccesAdmin?.Invoke(adminData, user.username);
+                MessageBox.Show($"Пароль коректний вхожу до робочої зони пункту №{adminData.id_help_point}");
             }
 
             

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:RedBerryProject.Views.ReceiverPages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      Title="Особиста інформація">
+      Title="Особиста інформація" Loaded="PersonalInfoEdit_Loaded">
+      
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -32,15 +33,17 @@
                         <DockPanel Margin="0,5">
                             <TextBlock Text="ПІБ:" Width="150" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="UserSurname" Width="120" Margin="0,0,5,0" ToolTip="Прізвище"/>
-                                <TextBox x:Name="UserName" Width="120" Margin="0,0,5,0" ToolTip="Ім'я"/>
-                                <TextBox x:Name="UserMiddleName" Width="120" ToolTip="По батькові"/>
+                                <TextBox x:Name="UserSurname" Width="120" Margin="0,0,5,0" ToolTip="Прізвище" PreviewTextInput="FullName_PreviewTextInput" DataObject.Pasting="FullName_Pasting" LostFocus="FullName_LostFocus" Tag="Surname"/>
+                                <TextBox x:Name="UserName" Width="120" Margin="0,0,5,0" ToolTip="Ім'я"        PreviewTextInput="FullName_PreviewTextInput" DataObject.Pasting="FullName_Pasting" LostFocus="FullName_LostFocus" Tag="FirstName"/>
+                                <TextBox x:Name="UserMiddleName" Width="120" ToolTip="По батькові"            PreviewTextInput="FullName_PreviewTextInput" DataObject.Pasting="FullName_Pasting" LostFocus="FullName_LostFocus" Tag="MiddleName"/>
                             </StackPanel>
                         </DockPanel>
 
                         <DockPanel Margin="0,5">
                             <TextBlock Text="Громадянство:" Width="150" VerticalAlignment="Center"/>
-                            <TextBox x:Name="UserNationality" Width="200" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="UserNationality" Width="200" HorizontalAlignment="Left" 
+                                     MaxLength="50"
+                                     PreviewTextInput="UserNationality_PreviewTextInput" DataObject.Pasting="UserNationality_Pasting" LostFocus="UserNationality_LostFocus"/>
                         </DockPanel>
 
                         <DockPanel Margin="0,5">
@@ -49,15 +52,17 @@
                         </DockPanel>
 
                         <DockPanel Margin="0,5">
-                            <TextBlock Text="Місце народження:" Width="150" VerticalAlignment="Top"/>
-                            <TextBox x:Name="UserPlaceOfBirth" TextWrapping="Wrap" MinHeight="40" MaxWidth="400" HorizontalAlignment="Left" Width="365"/>
+                            <TextBlock Text="Місце народження: (місто, село, селище, район, область, країна)" Width="355" DockPanel.Dock="Top" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="150" />
+                                <TextBox x:Name="UserPlaceOfBirth" TextWrapping="Wrap" MinHeight="40" MaxWidth="400" HorizontalAlignment="Left" Width="365"/>
+                            </StackPanel>
                         </DockPanel>
-
                         <DockPanel Margin="0,5">
                             <TextBlock Text="Стать:" Width="150" VerticalAlignment="Center"/>
                             <ComboBox x:Name="UserChooseSex" Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True" 
                                       Text="Не обрано">
-                                
+
                                 <ComboBoxItem Content="Чоловік"/>
                                 <ComboBoxItem Content="Жінка"/>
                             </ComboBox>
@@ -85,12 +90,18 @@
                     <StackPanel>
                         <DockPanel Margin="0,5">
                             <TextBlock Text="Номер телефону:" Width="150" VerticalAlignment="Center"/>
-                            <TextBox x:Name="UserPhoneNumber" Width="200" HorizontalAlignment="Left" Text="+38 098 847 38 38"/>
+                            <TextBox x:Name="UserPhoneNumber" Width="200" HorizontalAlignment="Left" 
+                                     Text="+380 " MaxLength="17"
+                                     PreviewTextInput="UserPhoneNumber_PreviewTextInput" 
+                                     PreviewKeyDown="UserPhoneNumber_PreviewKeyDown" 
+                                     LostFocus="UserPhoneNumber_LostFocus"/>
                         </DockPanel>
 
                         <DockPanel Margin="0,5">
                             <TextBlock Text="Номер банківської карти:" Width="150" VerticalAlignment="Center"/>
-                            <TextBox x:Name="UserBankCardNumber" Width="200" HorizontalAlignment="Left" Text="0000 0000 0000 0000"/>
+                            <TextBox x:Name="UserBankCardNumber" Width="200" HorizontalAlignment="Left" 
+                                     PreviewTextInput="UserBankCardNumber_PreviewTextInput"
+                                     LostFocus="UserBankCardNumber_LostFocus"/>
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>

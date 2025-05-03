@@ -20,8 +20,8 @@ namespace RedBerryProject.Views.ReceiverPages
     /// </summary>
     public partial class ReceiverWindow : Window
     {
-        private Receiver _receiver;
-        public ReceiverWindow(Receiver receiverData, string username)
+        private UserData _receiver;
+        public ReceiverWindow(UserData receiverData, string username)
         {
             InitializeComponent();
             tbGreetingFrontPage.Text += username;
@@ -42,7 +42,6 @@ namespace RedBerryProject.Views.ReceiverPages
         private void ButtonShowPersonalInfo_Click(object sender, RoutedEventArgs e)
         {
             OpenPersonalInfoPage();
-
         }
         private void OpenPersonalInfoEditPage()
         {

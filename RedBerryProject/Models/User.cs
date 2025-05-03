@@ -9,13 +9,10 @@ namespace RedBerryProject.Models
 {
     public  class User
     {
-        public long Id { get; set; } // це буде отримуватись під час завантаження з БД
-        public string? Username { get; set; }
-        public string? Password { get; set; }
-        public string? Role { get; set; }
-        //public string? Name { get; set; }
-        //public string? Surname { get; set; }
-        //public string? MiddleName { get; set; }
-        //public abstract string GetRole();
+        public long id { get; set; } // це буде отримуватись під час завантаження з БД
+        public string? username { get; set; }
+        public string? password { get; set; }
+        public string? role { get; set; }
+       
     }
 }

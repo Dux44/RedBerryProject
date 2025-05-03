@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Runtime.Intrinsics.Arm;
 using Dapper;
 using RedBerryProject.Models;
+using System.Diagnostics;
 
 namespace RedBerryProject.Services
 {
@@ -29,33 +30,12 @@ namespace RedBerryProject.Services
             using var connection = CreateConnection();
             const string query = @"
                 INSERT INTO USERS (username, password, role)
-                VALUES (@Username, @Password, @Role);
+                VALUES (@username, @password, @role);
                 SELECT last_insert_rowid();";
 
             return connection.ExecuteScalar<long>(query, user);
         }
-        public void UpdateReceiver(Receiver receiver)
-        {
-            using var connection = CreateConnection();
-            const string query = @"
-            UPDATE Receiver SET
-                login = @Login,
-                password = @Password,
-                name = @Name,
-                surname = @Surname,
-                middle_name = @MiddleName,
-                nationality = @Nationality,
-                date_of_birth = @DateOfBirth,
-                address_of_birth = @AddressOfBirth,
-                gender = @Gender,
-                documental_address = @DocumentalAddress,
-                current_address = @CurrentAddress,
-                phone_number = @PhoneNumber,
-                card_number = @CardNumber,
-                twoPhotos_of_passport = @TwoPhotosOfPassport
-                WHERE id = @Id";
-            connection.Execute(query, receiver);
-        }
+       
         public bool UserExists(string username)
         {
             using var connection = CreateConnection();
@@ -76,7 +56,7 @@ namespace RedBerryProject.Services
 
             return connection.QueryFirstOrDefault<User>(query, new { Username = username });
         }
-        public void InsertUserData(Receiver data)
+        public void InsertUserData(UserData data)
         {
             using var connection = CreateConnection();
             const string query = @"
@@ -86,33 +66,56 @@ namespace RedBerryProject.Services
                  gender, addres_offical, addres_current,
                  phone_number, card_number
                 ) VALUES (
-                @Id_user, '', '', '', '', @DateOfBirth, '', '', '', '', '', ''
+                @id_user, '', '', '', '', @date_of_birth, '', '', '', '', '', ''
         );";
 
             connection.Execute(query, data);
         }
-        public Receiver? GetUserDataByUserId(long userId)
+        public void UpdateUserData(UserData user_data)
+        {
+            using var connection = CreateConnection();
+
+            const string query = @"
+            UPDATE USERSDATA SET
+                 firstname = @firstname,
+                 secondname = @secondname,
+                 middlename = @middlename,
+                 nationality = @nationality,
+                 date_of_birth = @date_of_birth,
+                 address_of_birth = @address_of_birth,
+                 gender = @gender,
+                 addres_offical = @addres_offical,
+                 addres_current = @addres_current,
+                 phone_number = @phone_number,
+                 card_number = @card_number
+            WHERE id_user = @id_user;
+            ";
+
+            int rowsAffected = connection.Execute(query, user_data);
+            Debug.WriteLine($"Rows affected: {rowsAffected}");
+        }
+        public UserData? GetUserDataByUserId(long userId)
         {
             using var connection = CreateConnection();
             const string query = @"
             SELECT 
                 id,
-                id_user AS IdUser,
-                firstname AS FirstName,
-                secondname AS SecondName,
-                middlename AS MiddleName,
-                nationality AS Nationality,
-                date_of_birth AS DateOfBirth,
-                address_of_birth AS AddresOfBirth,
-                gender AS Gender,
-                addres_offical AS AddresOffical,
-                addres_current AS AddresCurrent,
-                phone_number AS PhoneNumber,
-                 card_number AS CardNumber
+                id_user,
+                firstname,
+                secondname,
+                middlename,
+                nationality,
+                date_of_birth,
+                address_of_birth,
+                gender,
+                addres_offical,
+                addres_current,
+                phone_number,
+                card_number
             FROM USERSDATA
             WHERE id_user = @UserId;";
 
-            return connection.QueryFirstOrDefault<Receiver>(query, new { UserId = userId });
+            return connection.QueryFirstOrDefault<UserData>(query, new { UserId = userId });
         }
         public void InsertAdminData(Admin data)
         {
@@ -121,7 +124,7 @@ namespace RedBerryProject.Services
             INSERT INTO ADMINDATA (
                 id_user, firstname, secondname, middlename, id_help_point
             ) VALUES (
-                @IdUser, @FirstName, @SecondName, @MiddleName, @IdHelpPoint
+                @id_user, @firstname, @secondname, @middlename, @id_help_point
             );";
 
             connection.Execute(query, data);
@@ -132,11 +135,11 @@ namespace RedBerryProject.Services
             const string query = @"
             SELECT 
                  id,
-                 id_user AS IdUser,
-                 firstname AS FirstName,
-                 secondname AS SecondName,
-                 middlename AS MiddleName,
-                 id_help_point AS IdHelpPoint
+                 id_user,
+                 firstname, 
+                 secondname, 
+                 middlename,
+                 id_help_point, 
             FROM ADMINDATA
             WHERE id_user = @UserId;";
 

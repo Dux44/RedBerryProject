@@ -8,11 +8,11 @@ namespace RedBerryProject.Models
 {
     public class Admin:User
     {
-        public long IdUser { get; set; }                 // @IdUser
-        public string? FirstName { get; set; }          // @FirstName
-        public string? SecondName { get; set; }          // @SecondName
-        public string? MiddleName { get; set; }          // @MiddleName
-        public int IdHelpPoint { get; set; }             // @IdHelpPoint
+        public long id_user { get; set; }                
+        public string? firstName { get; set; }          
+        public string? secondname { get; set; }          
+        public string? middlename { get; set; }         
+        public int id_help_point { get; set; }            
 
     }
 }

@@ -41,11 +41,10 @@ namespace RedBerryProject
             registerPage.NavigateToAuth += ShowAuthPage;
             MainFrame.Navigate(registerPage);
         }
-        private void AuthPage_AuthSucces(Receiver userData, string username)
+        private void AuthPage_AuthSucces(UserData userData, string username)
         {
            
             var receiverWindow = new ReceiverWindow(userData,username);
-            
             receiverWindow.Show();
             Close();
         }

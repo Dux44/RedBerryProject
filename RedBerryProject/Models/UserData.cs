@@ -15,7 +15,7 @@ namespace RedBerryProject.Models
         public string? middlename { get; set; }
         public string? nationality { get; set; }
         public DateTime date_of_birth { get; set; }
-        public string? address_of_birth { get; set; }
+        public string? addres_of_birth { get; set; }
         public string? gender { get; set; }
         public string? addres_offical { get; set; }
         public string? addres_current { get; set; }

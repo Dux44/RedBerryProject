@@ -53,5 +53,10 @@ namespace RedBerryProject.Views.ReceiverPages
             var personalInfoPage = new PersonalInfo(OpenPersonalInfoEditPage, ref _receiver);
             ReceiverFrame.Navigate(personalInfoPage);
         }
+        private void ButtonCreateApplicateion_Click(object sender, RoutedEventArgs e)
+        {
+            var application = new HelpApplication(_receiver);
+            application.ShowDialog();
+        }
     }
 }

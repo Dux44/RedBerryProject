@@ -64,9 +64,9 @@ namespace RedBerryProject.Views.ReceiverPages
                 _receiver.date_of_birth = UserDateOfBirth.DisplayDate;
 
                 var selectedItem = UserChooseSex.SelectedItem as ComboBoxItem;
-                _receiver.gender = selectedItem?.Content?.ToString(); //тут отримати string не опис
+                _receiver.gender = selectedItem?.Content?.ToString();
 
-                _receiver.address_of_birth = UserPlaceOfBirth.Text;
+                _receiver.addres_of_birth = UserPlaceOfBirth.Text;
                 _receiver.addres_offical = UserOfficialAddres.Text;
                 _receiver.addres_current = UserCurrentAddres.Text;
                 _receiver.phone_number = UserPhoneNumber.Text;
@@ -98,7 +98,7 @@ namespace RedBerryProject.Views.ReceiverPages
                 UserMiddleName.Text = _receiver.middlename == null ? "" : _receiver.middlename;
                 UserNationality.Text = _receiver.nationality == null ? "" : _receiver.nationality;
                 UserDateOfBirth.Text = _receiver.date_of_birth.ToString(); //mb exeption
-                UserPlaceOfBirth.Text = _receiver.address_of_birth == null ? "" : _receiver.address_of_birth;
+                UserPlaceOfBirth.Text = _receiver.addres_of_birth == null ? "" : _receiver.addres_of_birth;
 
                 switch (_receiver.gender)
                 {

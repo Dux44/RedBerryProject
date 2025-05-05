@@ -52,7 +52,8 @@
         <Button Content="Нова заява" Grid.Row="1" Grid.Column="2"
                 Width="70" Height="40" HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="20,0,0,10"/>
+                Margin="20,0,0,10"
+                Click="ButtonCreateApplicateion_Click"/>
         <Frame x:Name="ReceiverFrame" NavigationUIVisibility="Hidden"
                Grid.Row="2" Grid.RowSpan="2"
                Grid.Column="2" Grid.ColumnSpan="2" 

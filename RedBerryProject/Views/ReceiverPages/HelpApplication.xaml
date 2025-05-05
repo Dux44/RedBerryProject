@@ -1,0 +1,209 @@
+﻿<Window x:Class="RedBerryProject.Views.ReceiverPages.HelpApplication"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RedBerryProject.Views.ReceiverPages"
+        mc:Ignorable="d"
+        Title="Заява на отримання допомоги" Height="650" Width="650" Loaded="HelpApplication_Loaded">
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,10,0,3"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,3,0,10"/>
+            <Setter Property="Padding" Value="5,3"/>
+            <Setter Property="Height" Value="30"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RequiredFieldStyle" TargetType="TextBlock" BasedOn="{StaticResource LabelStyle}">
+            <Setter Property="Margin" Value="0,10,0,3"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Заява на отримання допомоги" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+            <!-- Інформаційний блок про заповнення форми -->
+            <Border BorderBrush="#FFDDDDDD" BorderThickness="1" Background="#FFF8F8F8" Padding="10" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="Інформація про заповнення форми:" FontWeight="SemiBold"/>
+                    <TextBlock Text="• Поля, позначені * є обов'язковими для заповнення" Margin="0,5,0,0"/>
+                    <TextBlock Text="• Будь ласка, надайте актуальні дані для швидкої обробки вашої заяви" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- ПІБ (три текстбокси) -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="ПІБ:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                    <TextBlock Text="Прізвище" Margin="0,0,0,3" FontSize="12"/>
+                    <TextBox x:Name="LastNameTextBox" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="5,0,5,0">
+                    <TextBlock Text="Ім'я" Margin="0,0,0,3" FontSize="12"/>
+                    <TextBox x:Name="FirstNameTextBox" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5,0,0,0">
+                    <TextBlock Text="По батькові" Margin="0,0,0,3" FontSize="12"/>
+                    <TextBox x:Name="MiddleNameTextBox" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Громадянство -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Громадянство:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="CitizenshipTextBox" Style="{StaticResource TextBoxStyle}"/>
+
+            <!-- Дата народження -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Дата народження:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <DatePicker x:Name="BirthDatePicker" Height="30" Margin="0,3,0,10"/>
+
+            <!-- Місце народження -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Місце народження (місто, село, район, область, країна):" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="BirthPlaceTextBox" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" Height="40"/>
+
+            <!-- Зареєстроване місце проживання -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Зареєстроване місце проживання:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="RegisteredAddressTextBox" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" Height="40"/>
+
+            <!-- Фактичне місце проживання -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Фактичне місце проживання:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="ActualAddressTextBox" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" Height="40"/>
+
+            <!-- Номер телефону -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Номер телефону:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <TextBox x:Name="PhoneNumberTextBox" Style="{StaticResource TextBoxStyle}"/>
+            <TextBlock Text="Формат: +380XXXXXXXXX" Margin="0,-5,0,5" FontSize="11" Foreground="#666666"/>
+
+            <!-- Повідомлення про причину переселення -->
+            <TextBlock Text="Повідомлення про причину переселення:" Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="RelocationReasonTextBox" TextWrapping="Wrap" Height="80" Margin="0,3,0,10" Padding="5"/>
+
+            <!-- Кнопка "Обрати пункт допомоги" та відображення вибраного пункту -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Пункт допомоги:" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
+            </Grid>
+            <Button x:Name="SelectHelpPointButton" Content="Обрати пункт допомоги" Height="35" 
+                    Background="#2196F3" Foreground="White" BorderThickness="0" Margin="0,3,0,5"
+                    Click="SelectHelpPointButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Панель з інформацією про вибраний пункт допомоги -->
+            <Border x:Name="SelectedHelpPointPanel" BorderBrush="#DDDDDD" BorderThickness="1" 
+                    Background="#F8F8F8" Padding="10" Margin="0,5,0,15" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Обраний пункт допомоги:" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="SelectedHelpPointTextBlock" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Обрати тип допомоги -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="*" Foreground="Red" FontWeight="Bold" Grid.Column="0"/>
+                <TextBlock Text="Обрати тип допомоги:" Style="{StaticResource LabelStyle}" FontWeight="Bold" Grid.Column="1"/>
+            </Grid>
+            <StackPanel Margin="10,5,0,15">
+                <CheckBox x:Name="MoneyHelpCheckBox" Content="Грошова допомога" Margin="0,5" Checked="MoneyHelpCheckBox_Checked" Unchecked="MoneyHelpCheckBox_Unchecked"/>
+                <Grid x:Name="BankCardGrid" Visibility="Collapsed" Margin="20,0,0,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Номер банківської карти:" Margin="0,5,0,3" FontSize="12"/>
+                    <TextBox Grid.Row="1" x:Name="BankCardNumberTextBox" Height="30" Padding="5,3" Margin="0,0,0,5"/>
+                    <TextBlock Grid.Row="1" Text="16 цифр без пробілів" Margin="0,35,0,0" FontSize="11" Foreground="#666666"/>
+                </Grid>
+                <CheckBox x:Name="FoodHelpCheckBox" Content="Продуктова допомога" Margin="0,5"/>
+                <CheckBox x:Name="RelocationHelpCheckBox" Content="Допомога з переселення" Margin="0,5"/>
+            </StackPanel>
+
+            <!-- Кнопка "Подати заяву" -->
+            <Button x:Name="SubmitApplicationButton" Content="Подати заяву" Height="40" 
+                    Background="#4CAF50" Foreground="White" BorderThickness="0" Margin="0,15,0,10"
+                    FontSize="14" FontWeight="Bold" Click="SubmitApplication_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

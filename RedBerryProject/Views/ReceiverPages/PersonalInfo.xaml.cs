@@ -42,7 +42,7 @@ namespace RedBerryProject.Views.ReceiverPages
             tbFullName.Text = $"{receiver.secondname} {receiver.firstname} {receiver.middlename}";
             tbNationality.Text = receiver.nationality == "" ? "не вказано" : receiver.nationality;
             tbDateOfBirth.Text = $"{receiver.date_of_birth}"; 
-            tbBirthPlace.Text = receiver.address_of_birth == "" ? "не вказано" : receiver.address_of_birth;
+            tbBirthPlace.Text = receiver.addres_of_birth == "" ? "не вказано" : receiver.addres_of_birth;
             tbGender.Text = receiver.gender == null? "не вказано" : receiver.gender.ToString();
             tbOfficialAddress.Text = receiver.addres_offical == "" ? "не вказано" : receiver.addres_offical;
             tbActualAddress.Text = receiver.addres_current == "" ? "не вказано" : receiver.addres_current;

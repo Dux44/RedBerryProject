@@ -1,0 +1,202 @@
+﻿<Window x:Class="RedBerryProject.Views.AdminPage.ApplicationDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RedBerryProject.Views.AdminPage"
+        mc:Ignorable="d"
+        Title="Деталі заявки" Height="650" Width="800"
+        WindowStartupLocation="CenterOwner" Background="#F5F5F5">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="LabelStyle">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,5,10,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="ValueStyle">
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="SectionBorder">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#3498db"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="MinWidth" Value="120"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок та інформація про заявку -->
+            <Border Grid.Row="0" Style="{StaticResource SectionBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="tbApplicationId" Grid.Column="0" 
+                                Text="Заявка #123" FontSize="18" FontWeight="Bold"/>
+
+                        <Border Grid.Column="1" Background="#E1F5FE" BorderBrush="#81D4FA" 
+                                BorderThickness="1" CornerRadius="3" Padding="8,3">
+                            <TextBlock x:Name="tbStatus" Text="У розгляді" FontWeight="SemiBold" Foreground="#0277BD"/>
+                        </Border>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Створено: " Style="{StaticResource LabelStyle}"/>
+                        <TextBlock x:Name="tbCreatedDate" Text="2025-05-06 10:30:00" Style="{StaticResource ValueStyle}"/>
+                        <TextBlock Text=" | " Margin="10,5"/>
+                        <TextBlock Text="Оновлено: " Style="{StaticResource LabelStyle}"/>
+                        <TextBlock x:Name="tbUpdatedDate" Text="2025-05-06 15:45:22" Style="{StaticResource ValueStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Інформація про користувача -->
+            <Border Grid.Row="1" Style="{StaticResource SectionBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Особисті дані заявника" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Ім'я та контакти -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="ПІБ:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="tbFullName" Text="Петренко Іван Васильович" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="Телефон:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" x:Name="tbPhone" Text="+380991234567" Style="{StaticResource ValueStyle}"/>
+
+                        <!-- Особиста інформація -->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Стать:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tbGender" Text="Чоловіча" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="Дата народження:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" x:Name="tbBirthDate" Text="1985-07-15" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Громадянство:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="tbNationality" Text="Українець" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="Місце народження:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" x:Name="tbBirthAddress" Text="м. Харків" Style="{StaticResource ValueStyle}"/>
+
+                        <!-- Адреси -->
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Адреса прописки:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tbOfficialAddress" 
+                                  Text="м. Харків, вул. Сумська, 100, кв. 25" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Фактична адреса:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tbCurrentAddress" 
+                                  Text="м. Львів, вул. Городоцька, 45, кв. 12" Style="{StaticResource ValueStyle}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Номер картки:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" x:Name="tbCardNumber" 
+                                  Text="4444 5555 6666 7777" Style="{StaticResource ValueStyle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- Інформація про причину втечі -->
+            <Border Grid.Row="2" Style="{StaticResource SectionBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Причина вимушеного покидання місця проживання" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock Grid.Row="1" x:Name="tbWhyRanAway" Text="Текст причини переїзду..." Style="{StaticResource ValueStyle}" 
+                              TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+
+            <!-- Інформація про необхідну допомогу -->
+            <Border Grid.Row="3" Style="{StaticResource SectionBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Необхідна допомога" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock Grid.Row="1" x:Name="tbKindOfHelp" Text="Текст про необхідну допомогу..." Style="{StaticResource ValueStyle}" 
+                              TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+
+            <!-- Кнопки дій -->
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button x:Name="ButtonApprove" Content="Одобрити" Background="#2ecc71">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonReject" Content="Скасувати" Background="#e74c3c">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonClose" Content="Закрити" Background="#7f8c8d">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

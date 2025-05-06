@@ -1,0 +1,159 @@
+﻿<Window x:Class="RedBerryProject.Views.AdminPage.AdminWIndow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RedBerryProject.Views.AdminPage"
+        mc:Ignorable="d"
+        Title="Панель адміністратора пункту допомоги" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen" Background="#F5F5F5">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#3498db"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#F0F8FF"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхня панель із заголовком і кнопками -->
+        <Grid Grid.Column="1" Grid.Row="0" Background="#2c3e50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="15,0,0,0">
+                <TextBlock x:Name="tbNameOfHelpPoint" Text="ПУНКТ ДОПОМОГИ №X" FontSize="22" FontWeight="Bold" Foreground="White"/>
+                <TextBlock x:Name="tbAddresOfHelpPoint" Text="Адреса:" FontSize="14" Foreground="#ECF0F1" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,15,0">
+                <Button x:Name="ButtonEdit" Content="Редагувати інформацію" Width="Auto" Height="32">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonExit" Content="Вихід" Width="80" Height="32" Background="#e74c3c">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Панель фільтрування -->
+        <Border Grid.Column="1" Grid.Row="1" Background="White" BorderThickness="0,0,0,1" BorderBrush="#DDDDDD" Padding="15,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Статус заявки:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox x:Name="ChoseWhatTypeOfApplication" Grid.Column="1" Width="180" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="Всі заявки" IsSelected="True"/>
+                    <ComboBoxItem Content="У розгляді"/>
+                    <ComboBoxItem Content="Одобрені"/>
+                    <ComboBoxItem Content="Скасовані"/>
+                </ComboBox>
+
+                <StackPanel Visibility="Collapsed" Grid.Column="3" Orientation="Horizontal">
+                    <TextBox x:Name="SearchTextBox" Width="200" Height="30" Margin="0,0,10,0" Padding="5" VerticalContentAlignment="Center" 
+                         BorderBrush="#CCCCCC" BorderThickness="1" ToolTip="Пошук по заявках">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button x:Name="SearchButton" Content="Пошук" Width="80"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Статистика -->
+        <Border Grid.Column="1" Grid.Row="2" Background="#f9f9f9" Padding="15,10" Margin="0,5,0,5">
+            <StackPanel Orientation="Horizontal">
+                <Border Background="#3498db" CornerRadius="5" Padding="10" Margin="0,0,15,0" Width="150">
+                    <StackPanel>
+                        <TextBlock Text="Всього заявок" Foreground="White" FontSize="12"/>
+                        <TextBlock x:Name="totalApplicationsCount" Text="0" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="#2ecc71" CornerRadius="5" Padding="10" Margin="0,0,15,0" Width="150">
+                    <StackPanel>
+                        <TextBlock Text="Одобрено" Foreground="White" FontSize="12"/>
+                        <TextBlock x:Name="approvedApplicationsCount" Text="0" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="#e74c3c" CornerRadius="5" Padding="10" Width="150">
+                    <StackPanel>
+                        <TextBlock Text="В очікуванні" Foreground="White" FontSize="12"/>
+                        <TextBlock x:Name="pendingApplicationsCount" Text="0" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <!-- Таблиця заявок -->
+        <DataGrid x:Name="listOfApplications" Grid.Column="1" Grid.Row="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="60" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Дата подачі" Width="120" Binding="{Binding SubmitDate}" />
+                <DataGridTextColumn Header="ПІБ заявника" Width="*" Binding="{Binding FullName}" />
+                <DataGridTextColumn Header="Телефон" Width="130" Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="Статус" Width="100" Binding="{Binding Status}" />
+                <DataGridTemplateColumn Header="Дії" Width="140">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Деталі" Width="60" Height="26" Margin="2" Click="ViewApplicationDetails_Click"/>
+                                <Button Content="Статус" Width="60" Height="26" Margin="2" Click="ChangeApplicationStatus_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

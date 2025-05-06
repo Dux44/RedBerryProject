@@ -37,8 +37,8 @@ namespace RedBerryProject.Views.ReceiverPages
         {
             // Показати поле для введення номера банківської карти
             BankCardGrid.Visibility = Visibility.Visible;
-            BankCardNumberTextBox.Text = _user_data.card_number == "" ? "" : _user_data.card_number;
 
+            BankCardNumberTextBox.Text = _user_data.card_number == "" ? "" : _user_data.card_number;
             // Додаємо тип допомоги до рядка вибраних типів
             UpdateHelpTypesList("money", true);
         }
@@ -66,6 +66,7 @@ namespace RedBerryProject.Views.ReceiverPages
             RegisteredAddressTextBox.Text = _user_data.addres_offical == "" ? "" : _user_data.addres_offical;
             ActualAddressTextBox.Text = _user_data.addres_current == "" ? "" : _user_data.addres_current;
             PhoneNumberTextBox.Text = _user_data.phone_number == "" ? "" : _user_data.phone_number;
+
 
             // Додаємо обробники подій для валідації текстових полів
             LastNameTextBox.LostFocus += ValidateTextBox;
@@ -138,7 +139,7 @@ namespace RedBerryProject.Views.ReceiverPages
                 MessageBox.Show("Будь ласка, виправте помилки у заяві.", "Помилка валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        
+
 
         private void SaveUserData()
         {
@@ -457,26 +458,6 @@ namespace RedBerryProject.Views.ReceiverPages
             // Виводимо в консоль для відлагодження
             Console.WriteLine("Selected help types: " + _selectedHelpTypes);
         }
-
-        // Метод для завантаження збережених типів допомоги
-        //private void LoadSelectedHelpTypes()
-        //{
-        //    if (_selectedHelpTypes.Contains("money"))
-        //    {
-        //        MoneyHelpCheckBox.IsChecked = true;
-        //    }
-
-        //    if (_selectedHelpTypes.Contains("supply"))
-        //    {
-        //        FoodHelpCheckBox.IsChecked = true;
-        //    }
-
-        //    if (_selectedHelpTypes.Contains("house"))
-        //    {
-        //        RelocationHelpCheckBox.IsChecked = true;
-        //    }
-        //}
-
         #endregion
     }
 }

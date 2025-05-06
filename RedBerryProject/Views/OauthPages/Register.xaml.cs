@@ -126,7 +126,7 @@ namespace RedBerryProject.Views.OauthPages
                 var newAdminData = new Admin
                 {
                     id_user = userId,
-                    id_help_point = cbNumberOfHelpPoint.SelectedIndex,
+                    id_help_point = cbNumberOfHelpPoint.SelectedIndex+1,
                 };
                 //запис у таблицю ADMINDATA
                 db.InsertAdminData(newAdminData);

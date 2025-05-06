@@ -37,7 +37,8 @@
             
             <Button Content="Історія заяв"
                     DockPanel.Dock="Top"
-                    Margin="10,3,10,3"/>
+                    Margin="10,3,10,3"
+                    Click="ButtonHistoryOfApplications_Click"/>
             
             <Button Content="Календар"
                     DockPanel.Dock="Top"

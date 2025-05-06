@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using RedBerryProject.Views.OauthPages;
 using RedBerryProject.Views.ReceiverPages;
 using RedBerryProject.Models;
+using RedBerryProject.Views.AdminPage;
 
 namespace RedBerryProject
 {
@@ -48,9 +49,11 @@ namespace RedBerryProject
             receiverWindow.Show();
             Close();
         }
-        private void AuthPage_AuthSuccesAdmin(Admin admin, string username)
+        private void AuthPage_AuthSuccesAdmin(Admin admin, long user_id)
         {
-            throw new NotImplementedException();
+            var adminWindow = new AdminWIndow(user_id);
+            adminWindow.Show();
+            Close();
         }
     }
 }

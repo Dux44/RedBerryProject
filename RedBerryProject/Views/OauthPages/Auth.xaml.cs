@@ -33,7 +33,7 @@ namespace RedBerryProject.Views.OauthPages
         public delegate void AuthSuccesUserHandler(UserData receiver, string username);
         public event AuthSuccesUserHandler AuthSuccesUser;
 
-        public delegate void AuthSuccesAdminHandler(Admin admin, string username);
+        public delegate void AuthSuccesAdminHandler(Admin admin, long userId);
         public event AuthSuccesAdminHandler AuthSuccesAdmin;
         public Auth()
         {
@@ -110,7 +110,7 @@ namespace RedBerryProject.Views.OauthPages
             else if(user.role == "Admin")
             {
                 var adminData = db.GetAdminDataByUserId(user.id);
-                AuthSuccesAdmin?.Invoke(adminData, user.username);
+                AuthSuccesAdmin?.Invoke(adminData, user.id);
                 MessageBox.Show($"Пароль коректний вхожу до робочої зони пункту №{adminData.id_help_point}");
             }
 

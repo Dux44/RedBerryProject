@@ -20,6 +20,9 @@ namespace RedBerryProject.Views.ReceiverPages
     /// </summary>
     public partial class ReceiverWindow : Window
     {
+        /// <summary>
+        /// TODO: Сторінка історія замовлень там показує усі замовлення зроблені даним користувачем
+        /// </summary>
         private UserData _receiver;
         public ReceiverWindow(UserData receiverData, string username)
         {
@@ -57,6 +60,11 @@ namespace RedBerryProject.Views.ReceiverPages
         {
             var application = new HelpApplication(_receiver);
             application.ShowDialog();
+        }
+        private void ButtonHistoryOfApplications_Click(object sender, RoutedEventArgs e)
+        {
+            var applicationHistory = new ApplicationsHistory(_receiver); ;
+            ReceiverFrame.Navigate(applicationHistory);
         }
     }
 }
